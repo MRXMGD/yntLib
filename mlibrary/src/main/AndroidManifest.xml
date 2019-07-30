@@ -1,0 +1,61 @@
+<!--
+  ~
+  ~
+  ~    Copyright (c) 2019. mrxmgd.com
+  ~
+  ~     @author MRXMGD <mrxmgd@gmail.com>
+  ~
+  ~
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mrxmgd.baselib">
+    <!--访问网络状态-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--访问网络-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--打电话-->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!--获取手机状态-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--获取设置-->
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <!--获取wifi状态-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--内存写入-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--修改设置-->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!--改变wifi状态-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!--获取位置-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--获取任务-->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <!-- 在SDCard中创建与删除文件 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!--结束后台进程-->
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <!-- 添加快捷方式 -->
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <!-- 移除快捷方式 -->
+    <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
+    <!-- 查询快捷方式 -->
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <!--震动-->
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <!--闪光灯-->
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <!--相机-->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+
+    <application>
+        <activity
+            android:name=".activity.ImagePreviewActivity"/>
+        <activity
+            android:name=".activity.WebActivity"/>
+    </application>
+
+</manifest>

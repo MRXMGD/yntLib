@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~
+  ~
+  ~    Copyright (c) 2019. mrxmgd.com
+  ~
+  ~     @author MRXMGD <mrxmgd@gmail.com>
+  ~
+  ~
+  -->
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="showIndex"
+            type="boolean" />
+
+        <variable
+            name="index"
+            type="String" />
+
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:orientation="vertical">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_margin="@dimen/distanceXXL"
+            android:text="@{index}"
+            android:textColor="@android:color/white"
+            android:visibility="@{showIndex?View.VISIBLE:View.GONE}" />
+
+    </FrameLayout>
+</layout>
+

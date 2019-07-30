@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~
+  ~
+  ~    Copyright (c) 2019. mrxmgd.com
+  ~
+  ~     @author MRXMGD <mrxmgd@gmail.com>
+  ~
+  ~
+  -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+                name="title"
+                type="String"/>
+
+        <variable
+                name="showTitleBar"
+                type="boolean"/>
+
+    </data>
+
+    <com.mrxmgd.baselib.view.MLinearLayout
+            android:id="@+id/layout_root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            android:background="@color/colorBg"
+            android:orientation="vertical">
+
+        <com.mrxmgd.baselib.view.MRelativeLayout
+                android:id="@+id/reLayout_title"
+                android:layout_width="match_parent"
+                android:background="@drawable/layer_bg_gradient_main"
+                android:layout_height="wrap_content"
+                android:visibility="@{showTitleBar?View.VISIBLE:View.GONE}">
+
+            <ImageView
+                    android:id="@+id/titleBar_iv_left"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_alignParentLeft="true"
+                    android:onClick="onClick"
+                    android:padding="@dimen/distance"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_back"/>
+
+            <TextView
+                    android:id="@+id/titleBar_tv_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center"
+                    android:minWidth="45dp"
+                    android:onClick="onClick"
+                    android:paddingLeft="@dimen/distance"
+                    android:paddingRight="@dimen/distance"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize"
+                    android:visibility="gone"/>
+
+            <TextView
+                    android:id="@+id/titleBar_tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginRight="45dp"
+                    android:gravity="center"
+                    android:maxEms="8"
+                    android:onClick="onClick"
+                    android:singleLine="true"
+                    android:text="@{title}"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSizeXXL"/>
+
+            <TextView
+                    android:id="@+id/titleBar_tv_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    android:minWidth="45dp"
+                    android:onClick="onClick"
+                    android:paddingLeft="@dimen/distance"
+                    android:paddingRight="@dimen/distance"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize"
+                    android:visibility="gone"/>
+
+            <ImageView
+                    android:id="@+id/titleBar_iv_right"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_toLeftOf="@id/titleBar_tv_right"
+                    android:layout_alignWithParentIfMissing="true"
+                    android:onClick="onClick"
+                    android:padding="@dimen/distance"
+                    android:visibility="gone"/>
+
+        </com.mrxmgd.baselib.view.MRelativeLayout>
+
+        <LinearLayout
+                android:id="@+id/layout_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+        </LinearLayout>
+
+    </com.mrxmgd.baselib.view.MLinearLayout>
+</layout>

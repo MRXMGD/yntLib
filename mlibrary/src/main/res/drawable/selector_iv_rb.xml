@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~
+  ~
+  ~    Copyright (c) 2019. mrxmgd.com
+  ~
+  ~     @author MRXMGD <mrxmgd@gmail.com>
+  ~
+  ~
+  -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true">
+        <layer-list>
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="@android:color/white" />
+                    <padding android:top="3dp" android:bottom="3dp" android:right="3dp" android:left="3dp"/>
+                    <stroke android:color="@color/colorMain" android:width="1dp" />
+                </shape>
+            </item>
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="@color/colorMain" />
+                </shape>
+            </item>
+        </layer-list>
+
+    </item>
+    <item android:state_selected="false">
+        <layer-list>
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="@android:color/white" />
+                    <padding android:top="3dp" android:bottom="3dp" android:right="3dp" android:left="3dp"/>
+                    <stroke android:color="@color/colorTextLight" android:width="1dp" />
+                </shape>
+            </item>
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="@color/colorDivider" />
+                </shape>
+            </item>
+        </layer-list>
+
+    </item>
+
+</selector>

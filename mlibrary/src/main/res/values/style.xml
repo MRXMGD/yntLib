@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~
+  ~    Copyright (c) 2019. mrxmgd.com
+  ~
+  ~     @author MRXMGD <mrxmgd@gmail.com>
+  ~
+  ~
+  -->
+
+<resources>
+    <!--水平分割线-->
+    <style name="dividerStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dividerLineSize</item>
+        <item name="android:background">@color/colorDivider</item>
+    </style>
+
+    <!--竖直分割线-->
+    <style name="dividerVerticalStyle">
+        <item name="android:layout_width">@dimen/dividerLineSize</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/colorDivider</item>
+    </style>
+    <!--普通文字-->
+    <style name="tvStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColorHint">@color/colorHint</item>
+        <item name="android:lineSpacingExtra">@dimen/textSpacing</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textSize">@dimen/textSize</item>
+    </style>
+    <!--没有背景的输入框-->
+    <style name="etStyleNoBg">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@null</item>
+        <item name="android:textColorHint">@color/colorHint</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:paddingLeft">@dimen/distance</item>
+        <item name="android:paddingRight">@dimen/distance</item>
+        <item name="android:textSize">@dimen/textSize</item>
+    </style>
+    <!-- 按钮-->
+    <style name="TvEnterStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/distanceL</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/textSizeL</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!--加载框样式-->
+    <style name="loadingDialogStyle" parent="@android:style/Theme.Dialog">
+        <!--去掉背景-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--去掉标题-->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 去掉背景阴影-->
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <!--弹窗样式-->
+    <style name="alertDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <!--底部dialog动画-->
+    <style name="bottomAnimStyle">
+        <item name="android:windowEnterAnimation">@anim/anim_translate_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/anim_translate_bottom_out</item>
+    </style>
+
+    <!--底部dialog样式-->
+    <style name="bottomDialogStyle">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowAnimationStyle">@style/bottomAnimStyle</item>
+    </style>
+</resources>

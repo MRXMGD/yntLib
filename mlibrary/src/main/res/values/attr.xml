@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~
+  ~
+  ~    Copyright (c) 2019. mrxmgd.com
+  ~
+  ~     @author MRXMGD <mrxmgd@gmail.com>
+  ~
+  ~
+  -->
+
+<resources>
+    <!--自定义tabView的属性-->
+    <declare-styleable name="MTabView">
+        <!--图标-->
+        <attr name="tabIcon" format="reference" />
+        <!--图标大小-->
+        <attr name="iconSize" format="dimension" />
+        <!--文字-->
+        <attr name="tabText" format="string" />
+        <!--文字大小-->
+        <attr name="textSize" format="dimension" />
+        <!--图标和文字的间距-->
+        <attr name="margin" format="dimension" />
+        <!--文字颜色-->
+        <attr name="textColor" format="reference" />
+    </declare-styleable>
+    <!--自定义setView的属性-->
+    <declare-styleable name="MSetView">
+        <!--左边图标-->
+        <attr name="leftIcon" format="reference" />
+        <!--左边图标大小-->
+        <attr name="leftIconSize" format="dimension" />
+        <!--左边图标右边距-->
+        <attr name="leftIconMargin" format="dimension" />
+        <!--右边图标-->
+        <attr name="rightIcon" format="reference" />
+        <!--左边图标大小-->
+        <attr name="rightIconSize" format="dimension" />
+        <!--左边文字-->
+        <attr name="leftText" format="string" />
+        <!--左边文字大小-->
+        <attr name="leftTextSize" format="dimension" />
+        <!--左边文字颜色-->
+        <attr name="leftTextColor" format="color" />
+        <!--右边文字-->
+        <attr name="rightText" format="string" />
+        <!--右边文字大小-->
+        <attr name="rightTextSize" format="dimension" />
+        <!--右边文字颜色-->
+        <attr name="rightTextColor" format="color" />
+    </declare-styleable>
+    <!--自定义MImageView的属性-->
+    <declare-styleable name="MImageView">
+        <!--按下透明度-->
+        <attr name="press_alpha" format="integer" />
+        <!--按下颜色-->
+        <attr name="press_color" format="color" />
+        <!--半径-->
+        <attr name="radius" format="dimension" />
+        <!--边框宽度-->
+        <attr name="border_width" format="dimension" />
+        <!--边框颜色-->
+        <attr name="border_color" format="color" />
+        <!--图片样式-->
+        <attr name="shape_type" format="enum">
+            <enum name="round" value="0" />
+            <enum name="rectangle" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <!--自定义RatingStarView的属性-->
+    <declare-styleable name="MRatingStarView">
+        <!--相邻星星间距-->
+        <attr name="starMargin" format="integer|dimension" />
+        <!--星星五角的半径-->
+        <attr name="starCornerRadius" format="float|dimension" />
+        <!--选中的颜色-->
+        <attr name="starForegroundColor" format="color|reference" />
+        <!--未选中颜色-->
+        <attr name="starBackgroundColor" format="color|reference" />
+        <!--边框颜色-->
+        <attr name="starStrokeColor" format="color|reference" />
+        <!--边框宽度-->
+        <attr name="starStrokeWidth" format="float|dimension" />
+        <!--星星数量-->
+        <attr name="starNum" format="integer" />
+        <!--分值-->
+        <attr name="rating" format="float" />
+        <!--星星的胖瘦程度-->
+        <attr name="starThickness" format="float|fraction" />
+        <!--是否显示未选中的边框-->
+        <attr name="drawStrokeForEmptyStar" format="boolean" />
+        <!--是否显示选中的边框-->
+        <attr name="drawStrokeForFullStar" format="boolean" />
+        <!--是否显示半星的边框-->
+        <attr name="drawStrokeForHalfStar" format="boolean" />
+        <!--是否可以点击-->
+        <attr name="enableSelectRating" format="boolean" />
+        <!--是否只显示半星-->
+        <attr name="onlyHalfStar" format="boolean" />
+    </declare-styleable>
+    <!--自定义Mlayout属性-->
+    <declare-styleable name="MRatioRelativeLayout">
+        <!--高度比-->
+        <attr name="heightRatio" format="integer"></attr>
+        <!--宽度比-->
+        <attr name="widthRatio" format="integer"></attr>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,16 @@
+<!--
+  ~
+  ~
+  ~    Copyright (c) 2019. mrxmgd.com
+  ~
+  ~     @author MRXMGD <mrxmgd@gmail.com>
+  ~
+  ~
+  -->
+
+<resources>
+    <string name="app_name">MLibrary</string>
+    <string name="loadingText">加载中...</string>
+    <string name="noMoreText">已经全部为你呈现了</string>
+    <string name="noNetWorkText">网络不给力啊，点击再试一次吧</string>
+</resources>
