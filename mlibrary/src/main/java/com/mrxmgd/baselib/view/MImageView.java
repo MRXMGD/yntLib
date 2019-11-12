@@ -12,20 +12,14 @@ package com.mrxmgd.baselib.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.RectF;
+import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.NinePatchDrawable;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-
+import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.mrxmgd.baselib.R;
 
 
@@ -48,10 +42,6 @@ public class MImageView extends AppCompatImageView {
     private int mBorderWidth;
     private int mBorderColor;
 
-    private int heightRatio = 1;
-    private int widthRatio = 1;
-    private float ratio = 1f;
-
     public MImageView(Context context) {
         super(context);
         init(context, null);
@@ -65,7 +55,6 @@ public class MImageView extends AppCompatImageView {
     public MImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
-
     }
 
 
@@ -89,11 +78,6 @@ public class MImageView extends AppCompatImageView {
                     mBorderWidth);
             mBorderColor = array.getColor(R.styleable.MImageView_border_color, mBorderColor);
             array.recycle();
-            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MRatioRelativeLayout);
-            heightRatio = typedArray.getInteger(R.styleable.MRatioRelativeLayout_heightRatio, 1);
-            widthRatio = typedArray.getInteger(R.styleable.MRatioRelativeLayout_widthRatio, 1);
-            ratio = (float) heightRatio / widthRatio;
-            typedArray.recycle();
         }
 
         // 按下的画笔设置
@@ -122,14 +106,101 @@ public class MImageView extends AppCompatImageView {
             return;
         }
         // 获取 bitmap，即传入 imageview 的 bitmap
-        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-        drawDrawable(canvas, bitmap);
+        if (drawable instanceof GifDrawable) {
+            drawGif(canvas, ((GifDrawable) drawable));
+        }
+        if (drawable instanceof BitmapDrawable) {
+            drawBitmap(canvas, ((BitmapDrawable) drawable).getBitmap());
+        }
+        if (drawable instanceof NinePatchDrawable) {
+            drawNinePatch(canvas, ((NinePatchDrawable) drawable));
+        }
         drawPress(canvas);
         drawBorder(canvas);
 
     }
 
-    private void drawDrawable(Canvas canvas, Bitmap bitmap) {
+    private void drawGif(Canvas canvas, GifDrawable gifDrawable) {
+        // 画笔
+        Paint paint = new Paint();
+        // 颜色设置
+        paint.setColor(0xffffffff);
+        // 抗锯齿
+        paint.setAntiAlias(true);
+        //Paint 的 Xfermode，PorterDuff.Mode.SRC_IN 取两层图像的交集部门, 只显示上层图像。
+        PorterDuffXfermode xfermode = new PorterDuffXfermode(PorterDuff.Mode.SRC_IN);
+        // 标志
+        int saveFlags = Canvas.MATRIX_SAVE_FLAG
+                | Canvas.CLIP_SAVE_FLAG
+                | Canvas.HAS_ALPHA_LAYER_SAVE_FLAG
+                | Canvas.FULL_COLOR_LAYER_SAVE_FLAG
+                | Canvas.CLIP_TO_LAYER_SAVE_FLAG;
+        canvas.saveLayer(0, 0, mWidth, mHeight, null, saveFlags);
+
+        if (mShapeType == 0) {
+            // 画遮罩，画出来就是一个和空间大小相匹配的圆
+            canvas.drawCircle(mWidth / 2, mHeight / 2, mWidth / 2, paint);
+        } else {
+            // 当ShapeType = 1 时 图片为圆角矩形
+            RectF rectf = new RectF(0, 0, getWidth(), getHeight());
+            canvas.drawRoundRect(rectf, mRadius, mRadius, paint);
+        }
+
+        paint.setXfermode(xfermode);
+
+        // 空间的大小 / bitmap 的大小 = bitmap 缩放的倍数
+        float scaleWidth = ((float) getWidth()) / gifDrawable.getIntrinsicWidth();
+        float scaleHeight = ((float) getHeight()) / gifDrawable.getIntrinsicHeight();
+
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        canvas.setMatrix(matrix);
+        canvas.drawPaint(paint);
+        gifDrawable.draw(canvas);
+        canvas.restore();
+    }
+
+    private void drawNinePatch(Canvas canvas, NinePatchDrawable ninePatchDrawable) {
+        // 画笔
+        Paint paint = new Paint();
+        // 颜色设置
+        paint.setColor(0xffffffff);
+        // 抗锯齿
+        paint.setAntiAlias(true);
+        //Paint 的 Xfermode，PorterDuff.Mode.SRC_IN 取两层图像的交集部门, 只显示上层图像。
+        PorterDuffXfermode xfermode = new PorterDuffXfermode(PorterDuff.Mode.SRC_IN);
+        // 标志
+        int saveFlags = Canvas.MATRIX_SAVE_FLAG
+                | Canvas.CLIP_SAVE_FLAG
+                | Canvas.HAS_ALPHA_LAYER_SAVE_FLAG
+                | Canvas.FULL_COLOR_LAYER_SAVE_FLAG
+                | Canvas.CLIP_TO_LAYER_SAVE_FLAG;
+        canvas.saveLayer(0, 0, mWidth, mHeight, null, saveFlags);
+
+        if (mShapeType == 0) {
+            // 画遮罩，画出来就是一个和空间大小相匹配的圆
+            canvas.drawCircle(mWidth / 2, mHeight / 2, mWidth / 2, paint);
+        } else {
+            // 当ShapeType = 1 时 图片为圆角矩形
+            RectF rectf = new RectF(0, 0, getWidth(), getHeight());
+            canvas.drawRoundRect(rectf, mRadius, mRadius, paint);
+        }
+
+        paint.setXfermode(xfermode);
+
+        // 空间的大小 / bitmap 的大小 = bitmap 缩放的倍数
+        float scaleWidth = ((float) getWidth()) / ninePatchDrawable.getIntrinsicWidth();
+        float scaleHeight = ((float) getHeight()) / ninePatchDrawable.getIntrinsicHeight();
+
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        canvas.setMatrix(matrix);
+        canvas.drawPaint(paint);
+        ninePatchDrawable.draw(canvas);
+        canvas.restore();
+    }
+
+    private void drawBitmap(Canvas canvas, Bitmap bitmap) {
         // 画笔
         Paint paint = new Paint();
         // 颜色设置
@@ -223,25 +294,6 @@ public class MImageView extends AppCompatImageView {
                 break;
         }
         return super.onTouchEvent(event);
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        // For simple implementation, or internal size is always 0.
-        // We depend on the container to specify the layout size of
-        // our view. We can't really know what it is since we will be
-        // adding and removing different arbitrary views and do not
-        // want the layout to change as this happens.
-        setMeasuredDimension(getDefaultSize(0, widthMeasureSpec),
-                getDefaultSize(0, heightMeasureSpec));
-        // Children are just made to fill our space.
-        int childWidthSize = getMeasuredWidth();
-        int childHeightSize = getMeasuredHeight();
-        widthMeasureSpec = MeasureSpec.makeMeasureSpec(childWidthSize,
-                MeasureSpec.EXACTLY);
-        heightMeasureSpec = MeasureSpec.makeMeasureSpec((int) (childWidthSize * ratio),
-                MeasureSpec.EXACTLY);
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
 }
