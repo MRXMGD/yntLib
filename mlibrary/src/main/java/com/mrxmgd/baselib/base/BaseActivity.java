@@ -309,11 +309,16 @@ public abstract class BaseActivity extends RxAppCompatActivity implements View.O
     @Override
     protected void onDestroy() {
         AppManager.getAppManager().removeActivity(this);
-        mContext = null;
-        mLoadingDialog.dismiss();
-        mLoadingDialog = null;
-        baseDataBinding = null;
-        childDataBinding = null;
+        if (mContext != null)
+            mContext = null;
+        if (mLoadingDialog != null) {
+            mLoadingDialog.dismiss();
+            mLoadingDialog = null;
+        }
+        if (baseDataBinding != null)
+            baseDataBinding = null;
+        if (childDataBinding != null)
+            childDataBinding = null;
         super.onDestroy();
     }
 }
