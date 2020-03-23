@@ -113,6 +113,7 @@ public class WebActivity extends BaseActivity {
 
     public static void startActivity(Context context, String url) {
         Intent intent = new Intent(context, WebActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("url", url);
         context.startActivity(intent);
     }

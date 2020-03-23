@@ -164,6 +164,7 @@ public class ImagePreviewActivity extends BaseActivity {
 
     public static void startActivity(Context context, List<Object> list, int position) {
         Intent intent = new Intent(context, ImagePreviewActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("list", (Serializable) list);
         intent.putExtra("position", position);
         context.startActivity(intent);
@@ -171,6 +172,7 @@ public class ImagePreviewActivity extends BaseActivity {
 
     public static void startActivity(Context context, String url) {
         Intent intent = new Intent(context, ImagePreviewActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("url", url);
         context.startActivity(intent);
     }
