@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~
+  ~
+  ~        Copyright (c) 2019. mrxmgd.com
+  ~
+  ~        @author MRXMGD <mrxmgd@gmail.com>
+  ~
+  ~
+  -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="@color/colorDivider" />
+            <padding android:bottom="1dp" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <solid android:color="@color/white" />
+            <padding android:bottom="1dp" />
+        </shape>
+    </item>
+</layer-list>

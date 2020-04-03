@@ -11,15 +11,15 @@
 
     <data>
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
 
         <variable
                 name="title"
-                type="String"/>
+                type="String" />
 
         <variable
                 name="showTitleBar"
-                type="boolean"/>
+                type="boolean" />
 
     </data>
 
@@ -27,15 +27,15 @@
             android:id="@+id/layout_root"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
             android:background="@color/colorBg"
+            android:fitsSystemWindows="true"
             android:orientation="vertical">
 
         <com.mrxmgd.baselib.view.MRelativeLayout
                 android:id="@+id/reLayout_title"
                 android:layout_width="match_parent"
-                android:background="@drawable/layer_bg_gradient_main"
                 android:layout_height="wrap_content"
+                android:background="@drawable/layer_bg_white_border_bottom_gray"
                 android:visibility="@{showTitleBar?View.VISIBLE:View.GONE}">
 
             <ImageView
@@ -45,8 +45,8 @@
                     android:layout_alignParentLeft="true"
                     android:onClick="onClick"
                     android:padding="@dimen/distance"
-                    android:visibility="gone"
-                    android:src="@drawable/ic_back"/>
+                    android:src="@drawable/ic_back"
+                    android:visibility="gone" />
 
             <TextView
                     android:id="@+id/titleBar_tv_left"
@@ -58,9 +58,10 @@
                     android:onClick="onClick"
                     android:paddingLeft="@dimen/distance"
                     android:paddingRight="@dimen/distance"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/colorTextLight"
                     android:textSize="@dimen/textSize"
-                    android:visibility="gone"/>
+                    android:textStyle="bold"
+                    android:visibility="gone" />
 
             <TextView
                     android:id="@+id/titleBar_tv_title"
@@ -74,8 +75,9 @@
                     android:onClick="onClick"
                     android:singleLine="true"
                     android:text="@{title}"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/textSizeXXL"/>
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/textSizeXXL"
+                    android:textStyle="bold" />
 
             <TextView
                     android:id="@+id/titleBar_tv_right"
@@ -87,19 +89,20 @@
                     android:onClick="onClick"
                     android:paddingLeft="@dimen/distance"
                     android:paddingRight="@dimen/distance"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/colorTextLight"
                     android:textSize="@dimen/textSize"
-                    android:visibility="gone"/>
+                    android:textStyle="bold"
+                    android:visibility="gone" />
 
             <ImageView
                     android:id="@+id/titleBar_iv_right"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
-                    android:layout_toLeftOf="@id/titleBar_tv_right"
                     android:layout_alignWithParentIfMissing="true"
+                    android:layout_toLeftOf="@id/titleBar_tv_right"
                     android:onClick="onClick"
                     android:padding="@dimen/distance"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
         </com.mrxmgd.baselib.view.MRelativeLayout>
 

@@ -11,9 +11,9 @@
 
 <resources>
     <color name="colorDivider">#eeeeee</color>
-    <color name="colorText">#555555</color>
+    <color name="colorText">#000</color>
     <color name="colorTextLight">#939393</color>
     <color name="colorHint">#bdbfc3</color>
-    <color name="colorMain">#6d65fb</color>
+    <color name="colorMain">#FF7900</color>
     <color name="colorBg">#f7f7f7</color>
 </resources>
