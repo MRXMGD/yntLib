@@ -33,6 +33,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
+
 import com.mrxmgd.baselib.R;
 import com.mrxmgd.baselib.databinding.ActivityBaseBinding;
 import com.mrxmgd.baselib.dialog.LoadingDialog;
@@ -131,7 +132,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements View.O
 //                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
         }
