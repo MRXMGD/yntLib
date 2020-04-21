@@ -44,9 +44,9 @@
                     android:layout_height="45dp"
                     android:layout_alignParentLeft="true"
                     android:onClick="onClick"
-                    android:padding="@dimen/distance"
-                    android:src="@drawable/ic_back"
-                    android:visibility="gone" />
+                    android:padding="@dimen/distanceXS"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_back"/>
 
             <TextView
                     android:id="@+id/titleBar_tv_left"
@@ -101,7 +101,7 @@
                     android:layout_alignWithParentIfMissing="true"
                     android:layout_toLeftOf="@id/titleBar_tv_right"
                     android:onClick="onClick"
-                    android:padding="@dimen/distance"
+                    android:padding="@dimen/distanceXS"
                     android:visibility="gone" />
 
         </com.mrxmgd.baselib.view.MRelativeLayout>
