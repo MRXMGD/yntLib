@@ -22,12 +22,12 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import com.bm.library.PhotoView;
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.mrxmgd.baselib.R;
 import com.mrxmgd.baselib.base.BaseActivity;
-import com.mrxmgd.baselib.base.GlideApp;
 import com.mrxmgd.baselib.databinding.ActivityImagePreviewBinding;
 
 import java.io.File;
@@ -139,10 +139,10 @@ public class ImagePreviewActivity extends BaseActivity {
             PhotoView photoView = new PhotoView(ImagePreviewActivity.this);
             photoView.enable();
             if (isLocalImg) {
-                GlideApp.with(ImagePreviewActivity.this).load(Uri.fromFile(new File(mList.get(position).toString()))).error(error)
+                Glide.with(ImagePreviewActivity.this).load(Uri.fromFile(new File(mList.get(position).toString()))).error(error)
                         .placeholder(pleaceHolder).transform(transformation).into(photoView);
             } else {
-                GlideApp.with(ImagePreviewActivity.this).load(mList.get(position).toString()).error(error)
+                Glide.with(ImagePreviewActivity.this).load(mList.get(position).toString()).error(error)
                         .placeholder(pleaceHolder).transform(transformation).into(photoView);
             }
             photoView.setOnClickListener(new View.OnClickListener() {
