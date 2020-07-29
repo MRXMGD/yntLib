@@ -26,10 +26,10 @@ public class LRecyclerViewUtils {
     @BindingAdapter("recyclerViewStyle")
     public static void setStyle(LRecyclerView recyclerView, int progressStyle) {
         recyclerView.setRefreshProgressStyle(progressStyle);
-        recyclerView.setHeaderViewColor(R.color.colorMain, R.color.colorText, android.R
+        recyclerView.setHeaderViewColor(R.color.colorPrimary, R.color.colorText, android.R
                 .color.white);
         recyclerView.setLoadingMoreProgressStyle(progressStyle);
-        recyclerView.setFooterViewColor(R.color.colorMain, R.color.colorText, android.R
+        recyclerView.setFooterViewColor(R.color.colorPrimary, R.color.colorText, android.R
                 .color.white);
         recyclerView.setFooterViewHint(recyclerView.getContext().getResources().getString(R.string.loadingText),
                 recyclerView.getContext().getResources().getString(R.string.noMoreText), recyclerView.getContext().getResources()

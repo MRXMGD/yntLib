@@ -30,7 +30,7 @@
         android:layout_marginLeft="@dimen/distance"
         android:layout_marginRight="@dimen/distanceXS"
         android:text="@string/loadingText"
-        android:textColor="@color/colorMain"
+        android:textColor="@color/colorPrimary"
         android:textSize="@dimen/textSize" />
 
 </LinearLayout>

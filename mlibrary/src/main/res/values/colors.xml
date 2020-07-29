@@ -14,6 +14,6 @@
     <color name="colorText">#e6000000</color>
     <color name="colorTextLight">#99000000</color>
     <color name="colorHint">#4c000000</color>
-    <color name="colorMain">#FF7900</color>
+    <color name="colorPrimary">#FF7900</color>
     <color name="colorBg">#f7f7f7</color>
 </resources>
