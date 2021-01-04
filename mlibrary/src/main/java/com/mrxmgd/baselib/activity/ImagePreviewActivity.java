@@ -10,17 +10,23 @@
 
 package com.mrxmgd.baselib.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import com.bm.library.PhotoView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
@@ -29,6 +35,7 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.mrxmgd.baselib.R;
 import com.mrxmgd.baselib.base.BaseActivity;
 import com.mrxmgd.baselib.databinding.ActivityImagePreviewBinding;
+import com.mrxmgd.baselib.util.FileUtils;
 
 import java.io.File;
 import java.io.Serializable;
@@ -36,8 +43,10 @@ import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 
+import pub.devrel.easypermissions.EasyPermissions;
 
-public class ImagePreviewActivity extends BaseActivity {
+
+public class ImagePreviewActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
     MyAdapter mAdapter;
     List<Object> mList;
     Transformation transformation;
@@ -114,6 +123,22 @@ public class ImagePreviewActivity extends BaseActivity {
         imagePreviewBinding.viewPager.setCurrentItem(position);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
+
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
+
+    }
+
     private class MyAdapter extends PagerAdapter {
         @Override
         public int getCount() {
@@ -135,7 +160,7 @@ public class ImagePreviewActivity extends BaseActivity {
         }
 
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
+        public Object instantiateItem(final ViewGroup container, int position) {
             PhotoView photoView = new PhotoView(ImagePreviewActivity.this);
             photoView.enable();
             if (isLocalImg) {
@@ -149,6 +174,22 @@ public class ImagePreviewActivity extends BaseActivity {
                 @Override
                 public void onClick(View view) {
                     finish();
+                }
+            });
+            photoView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (EasyPermissions.hasPermissions(ImagePreviewActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    ) {
+                        if (FileUtils.saveBitmap(((BitmapDrawable) ((PhotoView) v).getDrawable()).getBitmap(), Environment.getExternalStorageDirectory().getAbsolutePath(), "/" + System.currentTimeMillis() + ".png")) {
+                            Toast.makeText(ImagePreviewActivity.this, "保存成功", Toast.LENGTH_LONG).show();
+                            MediaScannerConnection.scanFile(ImagePreviewActivity.this, new String[]{Environment.getExternalStorageDirectory().getAbsolutePath()}, null, null);
+                        } else
+                            Toast.makeText(ImagePreviewActivity.this, "保存失败", Toast.LENGTH_LONG).show();
+                    } else {
+                        EasyPermissions.requestPermissions(ImagePreviewActivity.this, "需要储存权限", 10001, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                    }
+                    return true;
                 }
             });
             container.addView(photoView);
