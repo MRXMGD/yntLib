@@ -125,7 +125,7 @@ public class ImagePreviewActivity extends BaseActivity implements EasyPermission
             @Override
             public void onClick(View v) {
                 try {
-                    saveImage(((BitmapDrawable) ((PhotoView) imagePreviewBinding.viewPager.findViewWithTag(imagePreviewBinding.viewPager.getCurrentItem())).getDrawable()).getBitmap());
+                    saveImage(((BitmapDrawable) ((PhotoView) mAdapter.getPrimaryItem()).getDrawable()).getBitmap());
                 } catch (Exception e) {
                     Toast.makeText(ImagePreviewActivity.this, "保存失败" + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
@@ -197,7 +197,6 @@ public class ImagePreviewActivity extends BaseActivity implements EasyPermission
                     return true;
                 }
             });
-            photoView.setTag(position);
             container.addView(photoView);
             return photoView;
         }
@@ -207,6 +206,16 @@ public class ImagePreviewActivity extends BaseActivity implements EasyPermission
             return POSITION_NONE;
         }
 
+        private View mCurrentView;
+
+        @Override
+        public void setPrimaryItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+            mCurrentView = (View) object;
+        }
+
+        public View getPrimaryItem() {
+            return mCurrentView;
+        }
     }
 
     private void saveImage(Bitmap bitmap) {
