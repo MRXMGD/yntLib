@@ -121,6 +121,16 @@ public class ImagePreviewActivity extends BaseActivity implements EasyPermission
             }
         });
         imagePreviewBinding.viewPager.setCurrentItem(position);
+        imagePreviewBinding.tvSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    saveImage(((BitmapDrawable) ((PhotoView) imagePreviewBinding.viewPager.findViewWithTag(imagePreviewBinding.viewPager.getCurrentItem())).getDrawable()).getBitmap());
+                } catch (Exception e) {
+                    Toast.makeText(ImagePreviewActivity.this, "保存失败" + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -179,19 +189,15 @@ public class ImagePreviewActivity extends BaseActivity implements EasyPermission
             photoView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if (EasyPermissions.hasPermissions(ImagePreviewActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    ) {
-                        if (FileUtils.saveBitmap(((BitmapDrawable) ((PhotoView) v).getDrawable()).getBitmap(), Environment.getExternalStorageDirectory().getAbsolutePath(), "/" + System.currentTimeMillis() + ".png")) {
-                            Toast.makeText(ImagePreviewActivity.this, "保存成功", Toast.LENGTH_LONG).show();
-                            MediaScannerConnection.scanFile(ImagePreviewActivity.this, new String[]{Environment.getExternalStorageDirectory().getAbsolutePath()}, null, null);
-                        } else
-                            Toast.makeText(ImagePreviewActivity.this, "保存失败", Toast.LENGTH_LONG).show();
-                    } else {
-                        EasyPermissions.requestPermissions(ImagePreviewActivity.this, "需要储存权限", 10001, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                    try {
+                        saveImage(((BitmapDrawable) ((PhotoView) v).getDrawable()).getBitmap());
+                    } catch (Exception e) {
+                        Toast.makeText(ImagePreviewActivity.this, "保存失败" + e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                     return true;
                 }
             });
+            photoView.setTag(position);
             container.addView(photoView);
             return photoView;
         }
@@ -201,6 +207,19 @@ public class ImagePreviewActivity extends BaseActivity implements EasyPermission
             return POSITION_NONE;
         }
 
+    }
+
+    private void saveImage(Bitmap bitmap) {
+        if (EasyPermissions.hasPermissions(ImagePreviewActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        ) {
+            if (FileUtils.saveBitmap(bitmap, Environment.getExternalStorageDirectory().getAbsolutePath(), "/" + System.currentTimeMillis() + ".png")) {
+                Toast.makeText(ImagePreviewActivity.this, "保存成功", Toast.LENGTH_LONG).show();
+                MediaScannerConnection.scanFile(ImagePreviewActivity.this, new String[]{Environment.getExternalStorageDirectory().getAbsolutePath()}, null, null);
+            } else
+                Toast.makeText(ImagePreviewActivity.this, "保存失败", Toast.LENGTH_LONG).show();
+        } else {
+            EasyPermissions.requestPermissions(ImagePreviewActivity.this, "需要储存权限", 10001, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
     }
 
     public static void startActivity(Context context, List<Object> list, int position) {
